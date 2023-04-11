@@ -6,8 +6,8 @@ import java.util.Scanner;
 import static com.javarush.task.pro.finish.Alphabet.ALPHABET;
 
 public class Main {
-    private static final String MENU = "Выберете режим работы \"1\" - зашифрование \"2\" - разшифрование,\n" +
-            " \"3\" - разшифрование методом BruteForse, для выхода введите \"exit\".";
+    private static final String MENU = "Выбирете режим работы\n \"1\" - зашифрование шифром Цезаря,\n \"2\" - раcшифрование шифром Цезаря,\n" +
+            " \"3\" - разшифрование методом BruteForse,\n для выхода введите \"exit\".";
 
     /**
      * Меню программы
@@ -41,12 +41,15 @@ public class Main {
             System.out.printf("Введите ключ шифрования от 1 до %d \n", ALPHABET.length() - 1);
         }
         key = scanner.nextInt();
-        Encrypt.encrypt(path, key);
-
+        if (key >= 0 && key <= ALPHABET.length() - 1) {
+            Encrypt.encrypt(path, key);
+        }else{
+            System.out.println("Некорректный ключ");
+        }
     }
 
     /**
-     * Режим разшифрования
+     * Режим раcшифрования
      */
     protected static void caseDecrypt() {
         System.out.println("Введете путь к файлу...");
@@ -58,11 +61,16 @@ public class Main {
             System.out.println("Введите известный ключ шифрования");
         }
         key = scanner.nextInt();
-        Decrypt.decryptFile(path, key);
+        if (key >= 0 && key <= ALPHABET.length() - 1 ) {
+            Decrypt.decryptFile(path, key);
+        }
+        else{
+            System.out.println("Некорректный ключ");
+        }
     }
 
     /**
-     * Режим разшифрования методм brute force
+     * Режим раcшифрования методм brute force
      */
     protected static void caseDecryptBruteForce() {
         System.out.println("Введете путь к файлу...");

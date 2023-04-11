@@ -11,7 +11,7 @@ import static com.javarush.task.pro.finish.Alphabet.ALPHABET;
 
 public class Decrypt {
     /**
-     * разшифрование файла методом brute force
+     * раcшифрование файла методом brute force
      *
      * @param path - абсолютный путь к зашифрованному файлу
      */
@@ -36,7 +36,7 @@ public class Decrypt {
     }
 
     /**
-     * разшифрование файла в случае если известный ключ шифрования
+     * раcшифрование файла в случае если известный ключ шифрования
      *
      * @param path - абсолютный путь к зашифрованному файлу
      * @param key  - ключ шифрования
@@ -115,9 +115,9 @@ public class Decrypt {
     }
 
     /**
-     * вывод результата разшифрования
+     * вывод результата раcшифрования
      *
-     * @param resultData - расшифрованне данные
+     * @param resultData - расшифрованные данные
      * @param path       - абсолютный путь файла куда будут записаны расшифрованные данные
      */
     private static void printFile(String resultData, Path path) {
