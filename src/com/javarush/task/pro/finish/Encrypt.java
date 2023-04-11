@@ -9,6 +9,7 @@ import java.nio.file.Path;
 import static com.javarush.task.pro.finish.Alphabet.ALPHABET;
 
 public class Encrypt {
+
     public static void encrypt(Path path, int key) {
         try (BufferedReader fileReader = Files.newBufferedReader(path)) {
             String nameEncryptFile = getNameEncryptFile(path.toString());
@@ -31,8 +32,7 @@ public class Encrypt {
 
     }
 
-
-    /*
+    /**
      * метод получения имени зашифрованного файла
      */
     private static String getNameEncryptFile(String oldFile) {
@@ -40,7 +40,7 @@ public class Encrypt {
         return oldFile.substring(0, dotIndex) + "Encrypt" + oldFile.substring(dotIndex);
     }
 
-    /*
+    /**
      * метод зашифрования информации
      */
     private static int encryptData(int data, int key) {
@@ -53,7 +53,7 @@ public class Encrypt {
         return result;
     }
 
-    /*
+    /**
      * Вывод результата работы
      */
     private static void printResult(String nameEncryptFile) {

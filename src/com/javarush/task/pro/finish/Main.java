@@ -1,7 +1,5 @@
 package com.javarush.task.pro.finish;
 
-
-import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Scanner;
 
@@ -11,6 +9,9 @@ public class Main {
     private static final String MENU = "Выберете режим работы \"1\" - зашифрование \"2\" - разшифрование,\n" +
             " \"3\" - разшифрование методом BruteForse, для выхода введите \"exit\".";
 
+    /**
+     * Меню программы
+     */
     public static void main(String[] args) {
 
         System.out.println(MENU);
@@ -27,6 +28,9 @@ public class Main {
         }
     }
 
+    /**
+     * режим зашифрования файла
+     */
     protected static void caseEncypt() {
         System.out.println("Введете путь к файлу...");
         Scanner scanner = new Scanner(System.in);
@@ -41,6 +45,9 @@ public class Main {
 
     }
 
+    /**
+     * Режим разшифрования
+     */
     protected static void caseDecrypt() {
         System.out.println("Введете путь к файлу...");
         Scanner scanner = new Scanner(System.in);
@@ -54,6 +61,9 @@ public class Main {
         Decrypt.decryptFile(path, key);
     }
 
+    /**
+     * Режим разшифрования методм brute force
+     */
     protected static void caseDecryptBruteForce() {
         System.out.println("Введете путь к файлу...");
         Scanner scanner = new Scanner(System.in);

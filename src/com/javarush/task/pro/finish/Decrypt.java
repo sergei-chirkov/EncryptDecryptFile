@@ -10,7 +10,11 @@ import static com.javarush.task.pro.finish.Alphabet.ALPHABET;
 
 
 public class Decrypt {
-
+    /**
+     * разшифрование файла методом brute force
+     *
+     * @param path - абсолютный путь к зашифрованному файлу
+     */
     public static void decryptBruteForce(Path path) {
         File file = new File(String.valueOf(path));
         if (file.isFile()) {
@@ -30,32 +34,44 @@ public class Decrypt {
             Main.caseDecryptBruteForce();
         }
     }
-    public static void decryptFile(Path path, int key){
+
+    /**
+     * разшифрование файла в случае если известный ключ шифрования
+     *
+     * @param path - абсолютный путь к зашифрованному файлу
+     * @param key  - ключ шифрования
+     */
+    public static void decryptFile(Path path, int key) {
         File file = new File(String.valueOf(path));
         if (file.isFile()) {
             String resultDecrypt = "";
-                resultDecrypt = decryptData(path, ALPHABET.length() - key);
-
-                if (checkDecryptFile(resultDecrypt)) {
-                    String nameDecryptFile = getNameDecryptFile(path.toString());
-                    Path decryptFile = Path.of(nameDecryptFile);
-                    printFile(resultDecrypt, decryptFile);
-                    System.out.println( "Успешно");
-                }
-                else {
-                    System.out.println("Ключ не подошел.");
-                }
+            resultDecrypt = decryptData(path, ALPHABET.length() - key);
+            if (checkDecryptFile(resultDecrypt)) {
+                String nameDecryptFile = getNameDecryptFile(path.toString());
+                Path decryptFile = Path.of(nameDecryptFile);
+                printFile(resultDecrypt, decryptFile);
+                System.out.println("Успешно");
+            } else {
+                System.out.println("Ключ не подошел.");
+            }
         } else {
             System.out.println("Файл не существует");
             Main.caseDecrypt();
         }
 
     }
-    // запись данных в буфер
+
+    /**
+     * метод расшифрования данных
+     *
+     * @param path - абсолютный путь к зашифрованному файлу
+     * @param key  - ключ шифрования
+     * @return - возвращвет расшифрованные данные ключем key
+     */
     private static String decryptData(Path path, int key) {
-        StringBuilder bufferedWriter = new StringBuilder();     // буфер для расшифрованный данных
+        StringBuilder bufferedWriter = new StringBuilder();
         try (BufferedReader files = Files.newBufferedReader(path)) {
-            while (files.ready()) {         // считываем зашифрованный файл
+            while (files.ready()) {
                 int oldChar = files.read();
                 int index = ALPHABET.indexOf(oldChar);
                 int newIndex = (index + key) % ALPHABET.length();
@@ -71,7 +87,9 @@ public class Decrypt {
         return bufferedWriter.toString();
     }
 
-    // проверка расшифрованного файла
+    /**
+     * проверка расшифрованного файла
+     */
     private static boolean checkDecryptFile(String bufferedWriter) {
         String[] strings = bufferedWriter.split("[ ]+|\n");
         for (String string : strings) {
@@ -85,11 +103,23 @@ public class Decrypt {
         return true;
     }
 
+    /**
+     * получение имени расшифрованного файла
+     *
+     * @param oldFile - имя зашифрованного файла
+     * @return - имя расшифрованного файла
+     */
     private static String getNameDecryptFile(String oldFile) {
         int dotIndex = oldFile.lastIndexOf(".");
         return oldFile.substring(0, dotIndex) + "Decrypt" + oldFile.substring(dotIndex);
     }
 
+    /**
+     * вывод результата разшифрования
+     *
+     * @param resultData - расшифрованне данные
+     * @param path       - абсолютный путь файла куда будут записаны расшифрованные данные
+     */
     private static void printFile(String resultData, Path path) {
         if (Files.notExists(path)) {
             try {
